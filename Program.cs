@@ -9,8 +9,6 @@ public class Program{
             
             CheckIn vehicleCheckIn = new CheckIn(); //Create an instance for the CheckIn class within the Program Main
 
-            //var LaunchCheckIn = await CheckIn.CheckInMain(args); //Call the CheckInMain method from the CheckIn class *Launch Check-in*
-
             string[] vehicleDecoded = await CheckIn.CheckInMain(args);  // Retrieve vehicle information from VinDecode   
                                                                         // The vehicleDecoded string array stores the parameters of the JSON object retreived from the API
 

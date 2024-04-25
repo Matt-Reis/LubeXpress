@@ -44,7 +44,7 @@ public class CheckIn
                                                                     // The vehicleDecoded string array stores the parameters of the JSON object retreived from the API
 
             Console.WriteLine("\nPress the ENTER key to enter the service menu, or ESC to restart the vehicle check-in procedure:");
-            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true); //the true parameter ensures that the key pressed by the user is not displayed into the terminal, whichever key is pressed is stored into keyInfo
 
             // If any other key besides Enter or ESC is pressed, the instructions will be reprinted until a valid key is pressed
 
