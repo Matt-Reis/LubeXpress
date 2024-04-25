@@ -1,0 +1,46 @@
+ //CI
+ int CheckCount = 0; //this is getting removed*********
+        do { //this is getting removed*********
+          
+            Console.WriteLine("\nPress the ENTER key to enter the service menu, or ESC to restart the vehicle check-in procedure:");
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+            // If any other key besides Enter or ESC is pressed, the instructions will be reprinted until a valid key is pressed
+
+            // If the enter key is pressed, launched the service menu
+            if (keyInfo.Key == ConsoleKey.Enter){
+                ServiceMenu vehicleService = new ServiceMenu();
+                await ServiceMenu.ServiceMainMenu(args);
+                break; //this is getting removed*********
+            }
+
+            //If the ESC key is pressed, restart the check-in procedure
+            else if (keyInfo.Key == ConsoleKey.Escape) {
+                return await CheckInMain(args);
+            }
+            
+        }
+        while (CheckCount == 0); //this is getting removed*********
+
+        return CheckCount; //this is getting removed*********
+-------------------------------------------------------------------------------------------------
+//SM
+                int MenuCount = 0; //this is getting removed*********
+        do { //this is getting removed*********
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+            if (keyInfo.Key == ConsoleKey.Enter){
+                Console.WriteLine("\nVehicle Build and Service Code Verified. Generating Repair Order . . .");
+                RepairOrder newRepairOrder = new RepairOrder();
+                MenuCount++;
+            } 
+
+            else if (keyInfo.Key == ConsoleKey.Escape){
+                return await ServiceMainMenu(args);
+            }
+
+        } 
+        while (MenuCount == 0); //this is getting removed*********
+
+        return MenuCount; //this is getting removed*********
+
