@@ -19,7 +19,7 @@ public class ServiceMenu {
 
         //READ SERVICE MENU INPUT
         string? ServiceInput = Console.ReadLine()?.ToUpper();
-        string? ServiceKey = @"[A-B][1-9]";
+        string? ServiceKey = @"[A-B][1-9]"; //defines the acceptable ServiceInput parameters
 
         Regex regex = new Regex(ServiceKey, RegexOptions.IgnoreCase); //This will check to see if the user input matches the
                                                                       // Service key/ valid input
@@ -27,6 +27,21 @@ public class ServiceMenu {
         if (regex.IsMatch(ServiceInput))
         {
             Console.WriteLine("\nThe service code you entered is " + ServiceInput + " . Press the ENTER key to confirm your selection, or press ESC \nto return to the service menu.");
+        
+            int count = 0;
+            do {    
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                
+                    if (keyInfo.Key == ConsoleKey.Enter){
+                        count++;
+                    }
+
+                    //If the ESC key is pressed, restart the Service menu
+                    else if (keyInfo.Key == ConsoleKey.Escape) {
+                        return await ServiceMainMenu(args);
+                    }
+            }
+            while (count < 1);
         }
 
         else
@@ -34,7 +49,6 @@ public class ServiceMenu {
             Console.WriteLine("Invalid user entry. Please enter characters [A-B][1-9]: "); //Incorrect input will display this message
             return await ServiceMainMenu(args);
         }
-
 
         return ServiceInput;
     }

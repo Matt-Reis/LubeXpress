@@ -22,7 +22,7 @@ public class CheckIn
     /*
     This is the entry point of the program, where the execution starts.
     The async keyword indicates that this method performs asynchronous operations.
-    Task represents an asynchronous operation that can return a value.
+    Task represents an asynchronous operation that CAN return a value.
     */
     public static async Task<string[]> CheckInMain(string[] args)
     {
@@ -43,22 +43,29 @@ public class CheckIn
         string[] vehicleDecoded = await VinDecode.DecodedVin(args);  //Call DevodedVin method from the VinDecode class. VinDecode.cs contains all code for API implementation
                                                                     // The vehicleDecoded string array stores the parameters of the JSON object retreived from the API
 
-            Console.WriteLine("\nPress the ENTER key to enter the service menu, or ESC to restart the vehicle check-in procedure:");
-            ConsoleKeyInfo keyInfo = Console.ReadKey(true); //the true parameter ensures that the key pressed by the user is not displayed into the terminal, whichever key is pressed is stored into keyInfo
+            int count = 0;
+            do {
+                Console.WriteLine("\nPress the ENTER key to enter the service menu, or ESC to restart the vehicle check-in procedure:");
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true); //the true parameter ensures that the key pressed by the user is not displayed into the terminal, whichever key is pressed is stored into the keyInfo variable
 
-            // If any other key besides Enter or ESC is pressed, the instructions will be reprinted until a valid key is pressed
+                // If any other key besides Enter or ESC is pressed, the instructions will be reprinted until a valid key is pressed
 
-            // If the enter key is pressed, launched the service menu
-            if (keyInfo.Key == ConsoleKey.Enter){
-                ServiceMenu vehicleService = new ServiceMenu();
-                await ServiceMenu.ServiceMainMenu(args);
- 
+                // If the enter key is pressed, launched the service menu
+                if (keyInfo.Key == ConsoleKey.Enter){
+                    ServiceMenu vehicleService = new ServiceMenu();
+                    await ServiceMenu.ServiceMainMenu(args);
+                    count++;
+                }
+
+                //If the ESC key is pressed, restart the check-in procedure
+                else if (keyInfo.Key == ConsoleKey.Escape) {
+                    count++;
+                    return await CheckInMain(args);
+                }
             }
+            while (count < 1);
+            
 
-            //If the ESC key is pressed, restart the check-in procedure
-            else if (keyInfo.Key == ConsoleKey.Escape) {
-                return await CheckInMain(args);
-            }
             return vehicleDecoded;
         }
 

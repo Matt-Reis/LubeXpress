@@ -15,6 +15,9 @@ public class RepairOrder {
         Console.WriteLine($"Year: {modelYear}");
         Console.WriteLine($"Origin: {origin}");
         Console.WriteLine($"Manufacturer: {manufacturer}");
+
+
+        
     }
 
 }
